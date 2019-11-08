@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Wedding_yungching.Wedding_UserAns>
+<div class="card-footer">
+    <table class="table table-hover" style="text-align:center">
+        <thead class="text-warning">
+            <tr>
+                <th>名次</th>
+                <th>名字</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{int z = 1; }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@z</td>
+                    <td>@item.name</td>
+                    <td>@item.fraction</td>
+                </tr>
+                z++;
+            }
+        </tbody>
+    </table>
+</div>

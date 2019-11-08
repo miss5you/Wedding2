@@ -1,0 +1,104 @@
+﻿
+@{
+    Layout = null;
+}
+
+@*@{
+        ViewBag.Title = "NewRandomPhoto";
+        Layout = "~/Views/Shared/_0112WeddingLayout.cshtml";
+    }*@
+<!DOCTYPE html>
+<html style="font-size: 40px;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>刮刮樂</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="layoutmode" content="standard">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="renderer" content="webkit">
+
+    <!--uc浏览器判断到页面上文字居多时，会自动放大字体优化移动用户体验。添加以下头部可以禁用掉该优化-->
+    <meta name="wap-font-scale" content="no">
+
+    <meta content="telephone=no" name="format-detection">
+    <meta http-equiv="Pragma" content="no-cache">
+
+    <script type="text/javascript">
+        //html root的字体计算应该放在最前面，这样计算就不会有误差了/
+        //2016.3.23 wjq update 之所以要加个判断返回一个20.5，是因为当用户在谷歌等浏览器直接输入手机端网站网址时，如果用户设置模块自定义样式的高度比较小，由于这时候的clientWidth为1920px，及返回的_htmlFontSize为40，这时候就会使模块太小，展示不完全，因此先取一个较为准确的值去展示。Mobi.resetHtmlFontSize()顺便也加了
+        var _htmlFontSize = (function () {
+            var clientWidth = document.documentElement ? document.documentElement.clientWidth : document.body.clientWidth;
+            if (clientWidth > 640) clientWidth = 640;
+            document.documentElement.style.fontSize = clientWidth * 1 / 16 + "px";
+            return clientWidth * 1 / 16;
+        })();
+    </script>
+    <link rel="stylesheet" type="text/css" href="../assets_wedding/js/random/base.min.css" />
+    <link href="../assets_wedding/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+</head>
+
+<body class="main_box" style="background-color: #1A1A1A">
+
+    <div class="content">
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-md-12" id="mask_img_bg">
+                    <div class="card card-chart">
+                        <div class="card-header">
+                            <img src="@ViewBag.photoname" style="height:100%">
+                        </div>
+                        <div class="card-body" style="font-family:Microsoft JhengHei;">
+                            <h6 class="card-title"><b style="line-height:20px;">@ViewBag.size</b></h6>
+                            <font size="3">@ViewBag.ex</font>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="fa fa-clock"><a>&nbsp;@ViewBag.date</a></i>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <img id="redux" src="../assets_wedding/js/random/mask-img2.jpg" />
+            </div>
+        </div>
+    </div>
+    <div class="show">
+        <img class="show_bg" src="../assets_wedding/js/random/ok.png">
+        <img class="show_bg1" src="../assets_wedding/js/random/ok1.png">
+        <img class="show_food" src="../assets_wedding/js/random/mask_img_bg1.jpg" />
+        <a class="close"></a>
+        <a class="btn"></a>
+    </div>
+
+    <div class="mask"></div>
+    <script type="text/javascript" src="../assets_wedding/js/random/jquery.min.js"></script>
+    <script type="text/javascript" src="../assets_wedding/js/random/jquery.eraser.js"></script>
+    <script type="text/javascript">
+        $(window).load(function () { //这个适用手机端，等图片加载完再显示，因为有可能会出现第一次加载图片没有加载完就不会出现canvas
+            $('#redux').eraser({
+                size: 60,   //设置橡皮擦大小
+                completeRatio: .6, //设置擦除面积比例
+               /* completeFunction: showResetButton*/   //大于擦除面积比例触发函数
+            });
+            function showResetButton() {
+                $(".main_box .show,.main_box .mask").fadeIn(300)
+            }
+            $(".main_box .mask,.main_box .show .close,.main_box .show .btn").click(function () {
+                $(".main_box .show,.main_box .mask").fadeOut(300)
+            })
+        })
+    </script>
+
+</body>
+
+</html>
+

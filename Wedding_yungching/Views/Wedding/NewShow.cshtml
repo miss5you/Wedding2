@@ -1,0 +1,80 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        /*.slide{
+          margin-right: 1000px;
+          margin-left: 650px;
+        }*/
+
+    </style>
+    @*<link href="../assets_wedding/css/material_icons.css" rel="stylesheet" />*@
+    <link href="/fontawesome__wedding/css/all.css" rel="stylesheet"> <!--load all styles -->
+    <link href="../assets_wedding/css/material-dashboard.css?v=2.1.1" rel="stylesheet" />
+</head>
+<body style="background-color:black">
+
+    @*<div class="pics">
+            <div style="background-color:blueviolet">
+                <img src="../images/Wedding/20190919175230.jpg" alt=""><a>使用  setTimeout（）方法设定定时2000毫秒</a>
+            </div>
+
+            <img src="../images/Wedding/20190919175345.jpg" alt="">
+            <img src="../images/Wedding/20190919175502.jpg" alt="">
+        </div>*@
+
+    <div class="content ">
+        @*<input type="hidden" id="photocount" value="@(ViewBag.count)000">*@
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2 slide">
+
+                    @foreach (var item in ViewBag.photo)
+                    {
+                        <div class="card card-chart" style="width:@(item.width)%;margin-left:@(item.Mleft)px;">
+                            <div class="card-header">
+                                <img src="..@item.photoname" style="width:100%;">
+                            </div>
+                            <div class="card-body" style="font-family:Microsoft JhengHei;">
+                                <h3 class="card-title"><b style="line-height:40px;">@item.size</b></h3>
+                                <font size="7" style="line-height:50px;">@item.ex</font>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <i class="fa fa-clock"><a>&nbsp;@item.date</a></i>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../assets_wedding/js/core/jquery.min.js"></script>
+    <script type="text/javascript" src="../Cycle_Plugin/jquery.cycle.all.js"></script>
+    <script>
+         setTimeout(function () {  //使用  setTimeout（）方法设定定时2000毫秒
+            window.location.reload();//页面刷新
+        }, (@ViewBag.count * 7000) + (@ViewBag.count * 1000));
+
+        $(document).ready(function () {
+            //$('.pics').cycle({
+            //    fx: 'fade'
+            //});
+           $('.slide').cycle({
+               fx: 'fade',
+               timeout: 7000,
+           });
+        });
+
+
+
+    </script>
+</body>
+</html>	

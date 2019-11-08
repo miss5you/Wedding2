@@ -1,0 +1,448 @@
+﻿
+@{
+    ViewBag.Title = "GameView";
+    Layout = "~/Views/Shared/_0112WeddingLayout.cshtml";
+}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header card-header-tabs" style="background-color:#ADD870">
+                        <div class="nav-tabs-navigation">
+                            <div class="nav-tabs-wrapper">
+                                @*<span class="nav-tabs-title">選單:</span>*@
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item" id="clickgame">
+                                        <a class="nav-link active show" data-toggle="tab">
+                                            <i class="fa fa-question-circle" style="font-size:1.5em">&nbsp;題目</i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" style="cursor:pointer" data-toggle="modal" data-target="#qModal" id="creatq">
+                                        <a class="nav-link" data-toggle="tab">
+                                            <i class="fa fa-plus-circle" style="font-size:1.5em">&nbsp;新增</i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" style="cursor:pointer" data-toggle="modal" data-target="#mconfig" id="config">
+                                        <a class="nav-link" data-toggle="tab">
+                                            <i class="fa fa-chart-bar" style="font-size:1.5em">&nbsp;統計</i>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" style="cursor:pointer" data-toggle="modal" data-target="#mtest" id="test">
+                                        <a class="nav-link" data-toggle="tab">
+                                            <i class="fa fa-chart-bar" style="font-size:1.5em">&nbsp;測試</i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="tab-content">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="GameViewShow">
+        </div>
+    </div>
+</div>
+
+
+
+@*新增題目*@
+<div class="modal fade" id="qModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">新增題目</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-tabs" style="background-color:#ADD870">
+                            <h4 class="card-title">輸入題目和選項(題目為必填,選項1~6必填1個)</h4>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating">題目</label>
+                                            <input type="text" class="form-control" id="question" style="color:blue">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating">選項1</label>
+                                            <input type="text" class="form-control" id="item01" style="color:blue">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating">選項2</label>
+                                            <input type="text" class="form-control" id="item02" style="color:blue">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating">選項3</label>
+                                            <input type="text" class="form-control" id="item03" style="color:blue">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating">選項4</label>
+                                            <input type="text" class="form-control" id="item04" style="color:blue">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating">選項5</label>
+                                            <input type="text" class="form-control" id="item05" style="color:blue">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating">選項6</label>
+                                            <input type="text" class="form-control" id="item06" style="color:blue">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating">分數(可為整數或有小數點)</label>
+                                            <input type="text" class="form-control" id="fraction" style="color:blue">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating">答案(不需填寫)</label>
+                                            <input type="text" class="form-control" id="qans" style="color:blue">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating">人數統計(不需填寫)</label>
+                                            <input type="text" class="form-control" id="qsum" style="color:blue">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <input id="getuid" hidden="">
+                <button type="button" class="btn" style="background-color:#ADD870" id="save">Save</button>
+                <button type="button" class="btn delormodify" style="background-color:#ADD870" id="modifysave">Modify</button>
+                <button type="button" class="btn delormodify" style="background-color:#D870AD" id="delete">Delete</button>
+                <button type="button" class="btn" style="background-color:#70ACD8" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*單題統計*@
+<div class="modal fade" id="countall" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">排名</h4>
+            </div>
+            <div class="modal-body">
+
+                <div id="GameSumShow"></div>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn" style="background-color:#70ACD8" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*全部統計*@
+<div class="modal fade" id="mconfig" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">統計</h4>
+            </div>
+            <div class="modal-body">
+
+                <div id="GameOtherShow"></div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" style="background-color:#70ACD8" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*測試*@
+<div class="modal fade" id="mtest" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">測試</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-tabs" style="background-color:#ADD870">
+                            <h4 class="card-title">輸入筆數</h4>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group bmd-form-group">
+                                            <label class="bmd-label-floating">測試筆數</label>
+                                            <input type="text" class="form-control" id="qtestuser" style="color:blue">
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn" style="background-color:#ADD870" id="testcreat">建立</button>
+                <button type="button" class="btn" style="background-color:#D870AD" id="testdelete">清除</button>
+                <button type="button" class="btn" style="background-color:#70ACD8" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        $('#save').click(function () {
+
+            //判斷問題不為空和選項六個其中一個不為空
+            if ($('#question').val() != "" && $('#fraction').val() != "" && ($('#item01').val() != "" || $('#item02').val() != "" || $('#item03').val() != "" || $('#item04').val() != "" || $('#item05').val() != "" || $('#item06').val() != "" )) {
+                var itemcheck = $('#item01').val() + $('#item02').val() + $('#item03').val() + $('#item05').val() + $('#item05').val() + $('#item06').val();
+                //選項不包含符號^
+                if (itemcheck.indexOf("^") == -1) {
+                    var item01 = $('#item01').val() != "" ? $('#item01').val() + "^" : "";
+                    var item02 = $('#item02').val() != "" ? $('#item02').val() + "^" : "";
+                    var item03 = $('#item03').val() != "" ? $('#item03').val() + "^" : "";
+                    var item04 = $('#item04').val() != "" ? $('#item04').val() + "^" : "";
+                    var item05 = $('#item05').val() != "" ? $('#item05').val() + "^" : "";
+                    var item06 = $('#item06').val() != "" ? $('#item06').val() + "^" : "";
+                    var itemall = item01 + item02 + item03 + item04 + item05 + item06;
+                    //itemall需去掉最後一碼
+                    var data = {
+                        "question": $('#question').val(), "item": itemall.substring(0, itemall.length - 1), "fraction": $('#fraction').val()
+                    }
+                    $.ajax({
+                        url: "@Url.Action("CreatRequestion", "Wedding")",
+                        data: data,
+                        type: "POST",
+                        dataType: "text",
+                        success: function (data) {
+                            if (data == "完成") {
+                                alert("新增完成!!");
+                                window.location = "/Wedding/GameView";
+                            }
+                            else {
+                                alert("新增失敗!!");
+                            }
+                        },
+                    });
+                }
+                else {
+
+                    alert("選項不包含符號^");
+
+                }
+
+            }
+            else {
+
+                alert("題目或選項、分數不可為空");
+            }
+        });
+
+         //顯示題目
+        $('#clickgame').click(function () {
+            $.ajax({
+                    url: "@Url.Action("GameShow", "Wedding")",
+                    type: "GET",
+                    dataType: "html",
+                    success: function (partialView) {
+                        $("#GameViewShow").html(partialView);
+                    }
+
+                })
+
+        });
+
+        //新增題目
+        $('#creatq').click(function () {
+            //清空
+            $("#question").val("");
+            $("#qans").val("");
+            $("#qsum").val("");
+            $("#fraction").val("");
+            for (var i = 1; i <= 6; i++) {
+                var itemname = "#" + "item0" + i;
+                $(itemname).val("");
+            }
+
+           //按鈕
+           $("#save").show();
+            $("#modifysave").hide();
+            $("#delete").hide();
+        });
+
+    //刪除or修改題目or選項
+    $('.delormodify').click(function () {
+        var type = $(this).attr("id") != "delete"  ? "修改" : "刪除";
+       if (confirm('是否'+type +'?')) {
+            var item = "";
+            for (var i = 1; i <= 6; i++) {
+                var itemname = "#" + "item0" + i;
+                if ($(itemname).val() != "") {
+                    item += $(itemname).val().replace('^',"") + "^";
+                }
+
+            }
+
+            $.ajax({
+                url: "@Url.Action("DelOrModify", "Wedding")",
+                type: "POST",
+                data: { "uid": $("#getuid").val(), "question": $("#question").val(), "item": item.substring(0, item.length - 1), "qans": $("#qans").val(), "qsum": $("#qsum").val(), "fraction": $("#fraction").val(), "type": type },
+                dataType: "text",
+                success: function (data) {
+                    if (data == "完成") {
+                        alert(type + '完成');
+                        window.location = "/Wedding/GameView";
+                    }
+                    else {
+                        alert(data);
+                    }
+
+                },
+
+            })
+        }
+
+    });
+
+
+
+          //顯示統計排名
+        $('#config').click(function () {
+            $.ajax({
+                    url: "@Url.Action("allsum", "Wedding")",
+                    type: "GET",
+                    dataType: "html",
+                    success: function (partialView) {
+                        $("#GameOtherShow").html(partialView);
+                    }
+
+                })
+
+        });
+
+
+         //測試(建立筆數)
+        $('#testcreat').click(function () {
+            if ($('#qtestuser').val() != "") {
+                var checkq = /^[0-9]*[1-9][0-9]*$/;
+                var user = $('#qtestuser').val();
+                if (checkq.test(user)) {
+                    if (user < 10000) {
+                        $("#testcreat").attr("disabled", true).text("建立中...");
+                        $.ajax({
+                            url: "@Url.Action("Gametest", "Wedding")",
+                            type: "POST",
+                            data: { "qtestuser": $("#qtestuser").val() },
+                            dataType: "text",
+                            success: function (data) {
+                                if (data == "完成") {
+                                    $("#testcreat").attr("disabled", false).text("建立");
+                                    alert("建立完成");
+                                }
+                                else {
+                                    alert(data);
+                                    $("#testcreat").attr("disabled", false).text("建立");
+                                }
+                            },
+                        })
+                    }
+                    else {
+                        alert("需小於10000");
+                    }
+                }
+                else {
+                    alert("只能是數字");
+                }
+
+            }
+            else {
+                alert("請輸入要建立的筆數!!");
+            }
+
+
+        });
+
+          //測試(清空資料)
+        $('#testdelete').click(function () {
+            if (confirm('確定是否清空資料?')) {
+             $("#testdelete").attr("disabled", true).text("清除中....");
+                $.ajax({
+                    url: "@Url.Action("DelAllUserAns", "Wedding")",
+                    type: "POST",
+                    dataType: "text",
+                    success: function (data) {
+                        if (data == "完成") {
+                            alert("刪除完成");
+                            $("#testdelete").attr("disabled", false).text("清除");
+                        }
+                        else {
+                            alert("error");
+                            $("#testdelete").attr("disabled", false).text("清除");
+                        }
+                    },
+                })
+            }
+        });
+
+    </script>
+
+}

@@ -1,0 +1,276 @@
+﻿@model PagedList.IPagedList<Wedding_yungching.Wedding_Question>
+@Html.PagedListPager(Model, Page => Url.Action("GameShow", new
+{
+    Page,
+
+}), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(PagedListRenderOptions.ClassicPlusFirstAndLast, new AjaxOptions()
+{ HttpMethod = "GET", UpdateTargetId = "GameViewShow" }))
+
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <table>
+                            <tr data-uid="@(item.uid)">
+                                <td style="width:40px">
+                                    <div class="card-header card-header-icon">
+                                        <div class="card-icon" style="background-color:#D870AD">
+                                            <h2>Q@(item.num)</h2>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="button" rel="tooltip" title="" class="btn btn-link btn-sm modify" data-original-title="Edit Task" data-toggle="modal" data-target="#qModal">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <h3 style="font-family:Microsoft JhengHei;">@item.question</h3>
+                                </td>
+
+                            </tr>
+                        </table>
+                        <hr>
+                        <div class="card-body">
+                            <div class="tab-content">
+                                <table class="table">
+                                    <tbody>
+                                        @{ int select = 1;}
+                                        @foreach (var option in item.item.Split('^'))
+                                        {
+                                            <tr>
+                                                <td style="width:20px">
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input class="form-check-input" type="checkbox" value="" id="@item.uid-@select">
+                                                            <span class="form-check-sign">
+                                                                <span class="check"></span>
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td style="font-size:16px">@option&nbsp;&nbsp;<z class="loading" id="@item.uid-showloading-@select"></z>&nbsp;&nbsp;<a id="@item.uid-showpeopleans-@select"></a></td>
+                                            </tr>
+
+                                            select++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <table style="text-align:center">
+                    <tr data-uid="@(item.uid)" data-allnum="@select">
+                        <td>
+                            @if (item.state == "X")
+                            {
+                                <button type="button" class="btn start" style="background-color:#70ACD8">start</button>
+                            }
+                            else
+                            {
+                                <button type="button" class="btn start" style="background-color:#D870AD">stop</button>
+                            }
+                            <button type="button" class="btn submit" style="background-color:#70ACD8">submit</button>
+                            <button type="button" class="btn view" style="background-color:#70ACD8" data-toggle="modal" data-target="#countall">View</button>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
+}
+
+<style>
+
+    /*顯示答對人數*/
+    .loading {
+        background: #FF6100; /*//設定進度條的顏色*/
+        height: 12px; /*設定進度條的高度*/
+        z-index: 99999 /*提高進度條的優先層級，避免被其他層遮擋*/
+    }
+</style>
+
+<script type="text/javascript">
+
+    //送出答案
+    $('.submit').click(function () {
+        if (confirm('送出答案?')) {
+            //正確的答案數
+            var allnum = parseInt($(this).closest("tr").data("allnum")) - 1;
+            var uid = $(this).closest("tr").data("uid");
+            for (var i = 1; i <= allnum; i++) {
+                var numid = "#" + uid + "-" + i;
+                if ($(numid).is(':checked')) {
+                    var ans = i;
+                }
+            }
+
+            var data = {
+                "uid": uid, "ans": ans, "allnum": allnum
+            }
+            $.ajax({
+                url: "@Url.Action("SubmitAns", "Wedding")",
+                data: data,
+                type: "POST",
+                dataType: "text",
+                success: function (data) {
+                    if (data.includes("完成")) {
+                        var info = data.substr(3)
+
+                        if (info != "") {
+                            var sum = 0;
+                            for (var z = 0; z < allnum; z++) {
+                                sum += parseInt(info.split(',')[z]);
+                                document.getElementById(uid + "-showpeopleans-" + (z + 1)).innerHTML = info.split(',')[z] + "人";
+                            }
+
+                            for (var x= 0; x < allnum; x++) {
+                                var all = info.split(',')[x] / sum * 100;
+                                $('#' + uid + "-showloading-" + (x + 1)).animate({'width':all + '%'},1000);
+                            }
+                        }
+
+                    }
+                    else {
+
+                        alert("新增失敗!!");
+
+                    }
+                },
+
+            });
+
+        }
+
+    });
+
+    //問題開始的時間
+        $('.start').click(function () {
+            var name = $(this).text() != "stop" ? "是否開始?" : "是否結束";
+            if (confirm(name)) {
+            var uid = $(this).closest("tr").data("uid");
+            var data = {
+                "uid": uid
+            }
+            //切換按鈕樣式
+            if ($(this).text() != "stop") {
+                $(this).text("stop");
+                $(this).css("background-color", "#D870AD");
+            }
+            else {
+                $(this).text("start");
+                $(this).css("background-color", "#70ACD8");
+            }
+
+            $.ajax({
+                url: "@Url.Action("GameSorT", "Wedding")",
+                data: data,
+                type: "POST",
+                dataType: "text",
+            });
+        }
+
+    });
+
+    @*//問題結束的時間
+    $('.stop').click(function () {
+        if (confirm('是否結束?')) {
+            var uid = $(this).closest("tr").data("uid");
+            var data = {
+                "uid": uid, "type": "stop"
+            }
+            $(this).text("start");
+            $(this).css("background-color", "#70ACD8");
+            $.ajax({
+                url: "@Url.Action("GameSorT", "Wedding")",
+                data: data,
+                type: "POST",
+                dataType: "text",
+            });
+        }
+
+    });*@
+
+
+      //看名次
+        $('.view').click(function () {
+            //清空
+            //$("#GameSumShow").remove();
+            var uid = $(this).closest("tr").data("uid");
+            $.ajax({
+                url: "@Url.Action("GameSumShow", "Wedding")",
+                data: {"uid": uid },
+                type: "GET",
+                dataType: "html",
+                success: function (partialView) {
+                    $("#GameSumShow").html(partialView);
+                }
+            })
+
+    });
+
+
+    //顯示修改項目
+    $('.modify').click(function () {
+         //修改按鈕
+        $("#delete").show();
+        $("#modifysave").show();
+        $("#save").hide();
+        //清空
+        $("#question").val("");
+        $("#fraction").val("");
+        $("#qans").val("");
+        $("#qsum").val("");
+        for (var i = 1; i <= 6; i++) {
+            var itemname = "#" + "item0" + i;
+            $(itemname).val("");
+        }
+        var uid = $(this).closest("tr").data("uid");
+            $.ajax({
+                url: "@Url.Action("modify", "Wedding")",
+                type: "GET",
+                data: {"uid" : uid},
+                dataType: "json",
+                success: function (data) {
+                    var jsonObj = JSON.stringify(data);
+                    var addorder = JSON.parse(jsonObj);
+                    $("#question").val(addorder.question);
+                    //$("#strtime").val(new Date(parseInt(addorder.start.substr(6))).f("yyyy-MM-dd HH:mm:ss"));
+                    //$("#stotime").val(new Date(parseInt(addorder.stop.substr(6))).f("yyyy-MM-dd HH:mm:ss"));
+                    $("#fraction").val(addorder.fraction);
+                    $("#qans").val(addorder.ans);
+                    $("#qsum").val(addorder.sumans);
+                    var item = addorder.item.split('^');
+                    var i = 1;
+                    $.each(item, function (index, value) {
+                        var itemname = "#" + "item0" + i;
+                        $(itemname).val(value);
+                        i++;
+                    });
+                    $(".bmd-form-group").addClass("is-filled");
+                    $("#getuid").val(uid);
+               },
+               error: function (data) {
+                   alert("error");
+               }
+
+
+           });
+    });
+
+
+
+</script>
+
+
+
