@@ -1,0 +1,982 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SDPayModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="clock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="10" />
+          <Property Name="date" Type="varchar" MaxLength="20" />
+          <Property Name="time" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Happy_time_drink">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="DrinkName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DrinkSweet" Type="nvarchar" MaxLength="10" />
+          <Property Name="DrinkIce" Type="nvarchar" MaxLength="10" />
+          <Property Name="DrinkSize" Type="nvarchar" MaxLength="10" />
+          <Property Name="DrinkAmount" Type="nvarchar" MaxLength="10" />
+          <Property Name="DrinkHowMatch" Type="float" />
+          <Property Name="Date" Type="nvarchar" MaxLength="15" />
+          <Property Name="Pay" Type="nvarchar" MaxLength="20" />
+          <Property Name="Paytype" Type="nvarchar" MaxLength="10" />
+          <Property Name="Paymoney" Type="float" />
+          <Property Name="State" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="Happy_time_food">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" />
+          <Property Name="FoodName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FoodTaste" Type="nvarchar" MaxLength="10" />
+          <Property Name="FoodQA" Type="nvarchar" MaxLength="100" />
+          <Property Name="FoodAmount" Type="nvarchar" MaxLength="10" />
+          <Property Name="FoodHowMatch" Type="float" />
+          <Property Name="Date" Type="nvarchar" MaxLength="15" />
+          <Property Name="Pay" Type="nvarchar" MaxLength="20" />
+          <Property Name="Paytype" Type="nvarchar" MaxLength="10" />
+          <Property Name="Paymoney" Type="float" />
+          <Property Name="State" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="HKuser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" />
+          <Property Name="clock_id" Type="nvarchar" MaxLength="5" />
+          <Property Name="numberid" Type="nvarchar" MaxLength="15" />
+          <Property Name="startday" Type="nvarchar" MaxLength="30" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="department" Type="nvarchar" MaxLength="50" />
+          <Property Name="adaccount" Type="nvarchar" MaxLength="15" />
+          <Property Name="LeaveAll" Type="nvarchar" MaxLength="10" />
+          <Property Name="state" Type="int" />
+          <Property Name="RightIds" Type="nvarchar" MaxLength="500" />
+          <Property Name="Balance" Type="float" />
+        </EntityType>
+        <EntityType Name="Leave">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" />
+          <Property Name="date" Type="nvarchar" MaxLength="20" />
+          <Property Name="starttime" Type="nvarchar" MaxLength="10" />
+          <Property Name="endtime" Type="nvarchar" MaxLength="10" />
+          <Property Name="vkind" Type="nvarchar" MaxLength="10" />
+          <Property Name="hour" Type="float" />
+          <Property Name="Ex" Type="nvarchar" MaxLength="100" />
+          <Property Name="Orderid" Type="nvarchar" MaxLength="30" />
+          <Property Name="agent" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="LeaveRequest">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Orderid" Type="nvarchar" MaxLength="30" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" />
+          <Property Name="sdate" Type="nvarchar" MaxLength="15" />
+          <Property Name="starttime" Type="nvarchar" MaxLength="10" />
+          <Property Name="edate" Type="nvarchar" MaxLength="15" />
+          <Property Name="endtime" Type="nvarchar" MaxLength="10" />
+          <Property Name="vkind" Type="nvarchar" MaxLength="10" />
+          <Property Name="hour" Type="float" />
+          <Property Name="Ex" Type="nvarchar" MaxLength="20" />
+          <Property Name="checkname" Type="nvarchar" MaxLength="30" />
+          <Property Name="Program" Type="nvarchar" MaxLength="10" />
+          <Property Name="Number" Type="int" />
+          <Property Name="Company" Type="nvarchar" MaxLength="10" />
+          <Property Name="State" Type="nvarchar" MaxLength="5" />
+          <Property Name="reason" Type="nvarchar" MaxLength="500" />
+          <Property Name="agent" Type="nvarchar" MaxLength="30" />
+          <Property Name="Motive" Type="nvarchar" MaxLength="500" />
+          <Property Name="account" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="LeaveRequest_Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="10" />
+          <Property Name="Program" Type="nvarchar" MaxLength="10" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" />
+          <Property Name="Account" Type="nvarchar" MaxLength="20" />
+          <Property Name="Number" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="30" />
+          <Property Name="Description" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="moviename" Type="nvarchar" MaxLength="500" />
+          <Property Name="date" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <!--產生期間發現錯誤:
+警告 6002: 資料表/檢視 'SDPay.dbo.Permission' 未定義主索引鍵。已推斷此索引鍵，並將定義建立成唯讀的資料表/檢視。-->
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PermissionItem" Type="nvarchar" MaxLength="200" />
+          <Property Name="Controller" Type="nvarchar" MaxLength="50" />
+          <Property Name="Ex" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="report_clock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clock_id" Type="nvarchar" MaxLength="5" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" />
+          <Property Name="date" Type="nvarchar" MaxLength="20" />
+          <Property Name="week" Type="nvarchar" MaxLength="15" />
+          <Property Name="rclock_in" Type="nvarchar" MaxLength="30" />
+          <Property Name="rclock_out" Type="nvarchar" MaxLength="30" />
+          <Property Name="state" Type="nvarchar" MaxLength="50" />
+          <Property Name="leave" Type="nvarchar" MaxLength="50" />
+          <Property Name="account" Type="nvarchar" MaxLength="30" />
+          <Property Name="Ex" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SDhappytime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" />
+          <Property Name="DrinkName" Type="nvarchar" MaxLength="50" />
+          <Property Name="DrinkSweet" Type="nvarchar" MaxLength="10" />
+          <Property Name="DrinkIce" Type="nvarchar" MaxLength="10" />
+          <Property Name="DrinkSize" Type="nvarchar" MaxLength="10" />
+          <Property Name="DrinkAmount" Type="nvarchar" MaxLength="10" />
+          <Property Name="DrinkHowMatch" Type="nvarchar" MaxLength="10" />
+          <Property Name="Food01Name" Type="nvarchar" MaxLength="500" />
+          <Property Name="Food01Taste" Type="nvarchar" MaxLength="10" />
+          <Property Name="Food01QA01" Type="nvarchar" MaxLength="50" />
+          <Property Name="Food01Amount" Type="nvarchar" MaxLength="10" />
+          <Property Name="Food01HM" Type="nvarchar" MaxLength="10" />
+          <Property Name="Date" Type="nvarchar" MaxLength="10" />
+          <Property Name="pay" Type="nvarchar" MaxLength="10" />
+          <Property Name="account" Type="nvarchar" MaxLength="20" />
+          <Property Name="paytype" Type="nvarchar" MaxLength="15" />
+          <Property Name="paymoney" Type="float" />
+          <Property Name="state" Type="nvarchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="SDLeave_Year">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Leave_name" Type="nvarchar" MaxLength="30" />
+          <Property Name="date" Type="nvarchar" MaxLength="20" />
+          <Property Name="Ex" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SDMisPs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="servername" Type="nvarchar" MaxLength="30" />
+          <Property Name="account" Type="nvarchar" MaxLength="50" />
+          <Property Name="pwd" Type="nvarchar" MaxLength="200" />
+          <Property Name="Ex" Type="nvarchar" MaxLength="100" />
+          <Property Name="state" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="SDuser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" />
+          <Property Name="clock_id" Type="nvarchar" MaxLength="5" />
+          <Property Name="numberid" Type="nvarchar" MaxLength="15" />
+          <Property Name="startday" Type="nvarchar" MaxLength="30" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" />
+          <Property Name="department" Type="nvarchar" MaxLength="50" />
+          <Property Name="adaccount" Type="nvarchar" MaxLength="30" />
+          <Property Name="LeaveAll" Type="nvarchar" MaxLength="10" />
+          <Property Name="state" Type="int" />
+          <Property Name="RightIds" Type="nvarchar" MaxLength="500" />
+          <Property Name="Balance" Type="float" />
+          <Property Name="Leaveex" Type="float" />
+          <Property Name="lastday" Type="nvarchar" MaxLength="30" />
+          <Property Name="Password" Type="nvarchar" MaxLength="500" />
+          <Property Name="agentA" Type="nvarchar" MaxLength="10" />
+          <Property Name="agentB" Type="nvarchar" MaxLength="10" />
+          <Property Name="mail" Type="nvarchar" MaxLength="100" />
+          <Property Name="company" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="10" />
+          <Property Name="clock_in" Type="varchar" MaxLength="30" />
+          <Property Name="clock_out" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Uploadinfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="photoname" Type="nvarchar" MaxLength="500" />
+          <Property Name="type" Type="nvarchar" MaxLength="20" />
+          <Property Name="date" Type="nvarchar" MaxLength="30" />
+          <Property Name="ex" Type="nvarchar" MaxLength="500" />
+          <Property Name="size" Type="nvarchar" MaxLength="50" />
+          <Property Name="state" Type="nvarchar" MaxLength="20" />
+          <Property Name="width" Type="nvarchar" MaxLength="20" />
+          <Property Name="Mleft" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Wedding_Question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="uid" Type="nvarchar" MaxLength="20" />
+          <Property Name="num" Type="int" Nullable="false" />
+          <Property Name="question" Type="nvarchar" MaxLength="1000" />
+          <Property Name="item" Type="nvarchar" MaxLength="1000" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" />
+          <Property Name="start" Type="datetime" />
+          <Property Name="stop" Type="datetime" />
+          <Property Name="ans" Type="int" Nullable="false" />
+          <Property Name="sumans" Type="nvarchar" MaxLength="100" />
+          <Property Name="state" Type="nvarchar" MaxLength="5" />
+          <Property Name="fraction" Type="float" />
+        </EntityType>
+        <EntityType Name="Wedding_UserAns">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="weddingname" Type="nvarchar" MaxLength="30" />
+          <Property Name="uid" Type="nvarchar" MaxLength="20" />
+          <Property Name="name" Type="nvarchar" MaxLength="30" />
+          <Property Name="ans" Type="int" Nullable="false" />
+          <Property Name="XorV" Type="nvarchar" MaxLength="5" />
+          <Property Name="fraction" Type="float" />
+          <Property Name="anstime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Wedding_UserInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="30" />
+          <Property Name="weddingname" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="workadd">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="10" />
+          <Property Name="date" Type="nvarchar" MaxLength="20" />
+          <Property Name="starttime" Type="nvarchar" MaxLength="10" />
+          <Property Name="endtime" Type="nvarchar" MaxLength="10" />
+          <Property Name="wkind" Type="nvarchar" MaxLength="20" />
+          <Property Name="hour" Type="float" />
+          <Property Name="Ex" Type="nvarchar" MaxLength="50" />
+          <Property Name="Orderid" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityContainer Name="SDPayModelStoreContainer">
+          <EntitySet Name="clock" EntityType="Self.clock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Happy_time_drink" EntityType="Self.Happy_time_drink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Happy_time_food" EntityType="Self.Happy_time_food" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HKuser" EntityType="Self.HKuser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Leave" EntityType="Self.Leave" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveRequest" EntityType="Self.LeaveRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LeaveRequest_Role" EntityType="Self.LeaveRequest_Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="report_clock" EntityType="Self.report_clock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDhappytime" EntityType="Self.SDhappytime" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDLeave_Year" EntityType="Self.SDLeave_Year" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDMisPs" EntityType="Self.SDMisPs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SDuser" EntityType="Self.SDuser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="test" EntityType="Self.test" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uploadinfo" EntityType="Self.Uploadinfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wedding_Question" EntityType="Self.Wedding_Question" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wedding_UserAns" EntityType="Self.Wedding_UserAns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wedding_UserInfo" EntityType="Self.Wedding_UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="workadd" EntityType="Self.workadd" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Permission" EntityType="Self.Permission" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Permission].[Id] AS [Id], 
+    [Permission].[PermissionItem] AS [PermissionItem], 
+    [Permission].[Controller] AS [Controller], 
+    [Permission].[Ex] AS [Ex]
+    FROM [dbo].[Permission] AS [Permission]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SDPayModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="clock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="date" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="time" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Happy_time_drink">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkSweet" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkIce" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkSize" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkAmount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkHowMatch" Type="Double" />
+          <Property Name="Date" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Pay" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Paytype" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Paymoney" Type="Double" />
+          <Property Name="State" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Happy_time_food">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FoodName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FoodTaste" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FoodQA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FoodAmount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FoodHowMatch" Type="Double" />
+          <Property Name="Date" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Pay" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Paytype" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Paymoney" Type="Double" />
+          <Property Name="State" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="HKuser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="clock_id" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="numberid" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="startday" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adaccount" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="LeaveAll" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="RightIds" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Balance" Type="Double" />
+        </EntityType>
+        <EntityType Name="Leave">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="starttime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="endtime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="vkind" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="hour" Type="Double" />
+          <Property Name="Ex" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Orderid" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="agent" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LeaveRequest">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Orderid" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="sdate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="starttime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="edate" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="endtime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="vkind" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="hour" Type="Double" />
+          <Property Name="Ex" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="checkname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Program" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="Company" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="reason" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="agent" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Motive" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="LeaveRequest_Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Company" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Program" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Account" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Movie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="moviename" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="report_clock">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clock_id" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="week" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="rclock_in" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="rclock_out" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="leave" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="account" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Ex" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SDhappytime">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkSweet" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkIce" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkSize" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkAmount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="DrinkHowMatch" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Food01Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Food01Taste" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Food01QA01" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Food01Amount" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Food01HM" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="pay" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="account" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="paytype" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="paymoney" Type="Double" />
+          <Property Name="state" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SDLeave_Year">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Leave_name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Ex" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SDMisPs">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="servername" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="account" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="pwd" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Ex" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SDuser">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="clock_id" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="numberid" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="startday" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="department" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="adaccount" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="LeaveAll" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="Int32" />
+          <Property Name="RightIds" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Balance" Type="Double" />
+          <Property Name="Leaveex" Type="Double" />
+          <Property Name="lastday" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="agentA" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="agentB" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="mail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="company" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="test">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="clock_in" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="clock_out" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Uploadinfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="photoname" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ex" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="size" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="width" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Mleft" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Wedding_Question">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="uid" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="num" Type="Int32" Nullable="false" />
+          <Property Name="question" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="item" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="start" Type="DateTime" Precision="3" />
+          <Property Name="stop" Type="DateTime" Precision="3" />
+          <Property Name="ans" Type="Int32" Nullable="false" />
+          <Property Name="sumans" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="state" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="fraction" Type="Double" />
+        </EntityType>
+        <EntityType Name="Wedding_UserAns">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="weddingname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="uid" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="ans" Type="Int32" Nullable="false" />
+          <Property Name="XorV" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="fraction" Type="Double" />
+          <Property Name="anstime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Wedding_UserInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="weddingname" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="workadd">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="date" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="starttime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="endtime" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="wkind" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="hour" Type="Double" />
+          <Property Name="Ex" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Orderid" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Permission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PermissionItem" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Controller" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Ex" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="SDPay" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="clock" EntityType="Self.clock" />
+          <EntitySet Name="Happy_time_drink" EntityType="Self.Happy_time_drink" />
+          <EntitySet Name="Happy_time_food" EntityType="Self.Happy_time_food" />
+          <EntitySet Name="HKuser" EntityType="Self.HKuser" />
+          <EntitySet Name="Leave" EntityType="Self.Leave" />
+          <EntitySet Name="LeaveRequest" EntityType="Self.LeaveRequest" />
+          <EntitySet Name="LeaveRequest_Role" EntityType="Self.LeaveRequest_Role" />
+          <EntitySet Name="Movie" EntityType="Self.Movie" />
+          <EntitySet Name="report_clock" EntityType="Self.report_clock" />
+          <EntitySet Name="SDhappytime" EntityType="Self.SDhappytime" />
+          <EntitySet Name="SDLeave_Year" EntityType="Self.SDLeave_Year" />
+          <EntitySet Name="SDMisPs" EntityType="Self.SDMisPs" />
+          <EntitySet Name="SDuser" EntityType="Self.SDuser" />
+          <EntitySet Name="test" EntityType="Self.test" />
+          <EntitySet Name="Uploadinfo" EntityType="Self.Uploadinfo" />
+          <EntitySet Name="Wedding_Question" EntityType="Self.Wedding_Question" />
+          <EntitySet Name="Wedding_UserAns" EntityType="Self.Wedding_UserAns" />
+          <EntitySet Name="Wedding_UserInfo" EntityType="Self.Wedding_UserInfo" />
+          <EntitySet Name="workadd" EntityType="Self.workadd" />
+          <EntitySet Name="Permission" EntityType="Self.Permission" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SDPayModelStoreContainer" CdmEntityContainer="SDPay">
+          <EntitySetMapping Name="clock">
+            <EntityTypeMapping TypeName="SDPayModel.clock">
+              <MappingFragment StoreEntitySet="clock">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="time" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Happy_time_drink">
+            <EntityTypeMapping TypeName="SDPayModel.Happy_time_drink">
+              <MappingFragment StoreEntitySet="Happy_time_drink">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DrinkName" ColumnName="DrinkName" />
+                <ScalarProperty Name="DrinkSweet" ColumnName="DrinkSweet" />
+                <ScalarProperty Name="DrinkIce" ColumnName="DrinkIce" />
+                <ScalarProperty Name="DrinkSize" ColumnName="DrinkSize" />
+                <ScalarProperty Name="DrinkAmount" ColumnName="DrinkAmount" />
+                <ScalarProperty Name="DrinkHowMatch" ColumnName="DrinkHowMatch" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Pay" ColumnName="Pay" />
+                <ScalarProperty Name="Paytype" ColumnName="Paytype" />
+                <ScalarProperty Name="Paymoney" ColumnName="Paymoney" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Happy_time_food">
+            <EntityTypeMapping TypeName="SDPayModel.Happy_time_food">
+              <MappingFragment StoreEntitySet="Happy_time_food">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FoodName" ColumnName="FoodName" />
+                <ScalarProperty Name="FoodTaste" ColumnName="FoodTaste" />
+                <ScalarProperty Name="FoodQA" ColumnName="FoodQA" />
+                <ScalarProperty Name="FoodAmount" ColumnName="FoodAmount" />
+                <ScalarProperty Name="FoodHowMatch" ColumnName="FoodHowMatch" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Pay" ColumnName="Pay" />
+                <ScalarProperty Name="Paytype" ColumnName="Paytype" />
+                <ScalarProperty Name="Paymoney" ColumnName="Paymoney" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HKuser">
+            <EntityTypeMapping TypeName="SDPayModel.HKuser">
+              <MappingFragment StoreEntitySet="HKuser">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="clock_id" ColumnName="clock_id" />
+                <ScalarProperty Name="numberid" ColumnName="numberid" />
+                <ScalarProperty Name="startday" ColumnName="startday" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="adaccount" ColumnName="adaccount" />
+                <ScalarProperty Name="LeaveAll" ColumnName="LeaveAll" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="RightIds" ColumnName="RightIds" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Leave">
+            <EntityTypeMapping TypeName="SDPayModel.Leave">
+              <MappingFragment StoreEntitySet="Leave">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="starttime" ColumnName="starttime" />
+                <ScalarProperty Name="endtime" ColumnName="endtime" />
+                <ScalarProperty Name="vkind" ColumnName="vkind" />
+                <ScalarProperty Name="hour" ColumnName="hour" />
+                <ScalarProperty Name="Ex" ColumnName="Ex" />
+                <ScalarProperty Name="Orderid" ColumnName="Orderid" />
+                <ScalarProperty Name="agent" ColumnName="agent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveRequest">
+            <EntityTypeMapping TypeName="SDPayModel.LeaveRequest">
+              <MappingFragment StoreEntitySet="LeaveRequest">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Orderid" ColumnName="Orderid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="sdate" ColumnName="sdate" />
+                <ScalarProperty Name="starttime" ColumnName="starttime" />
+                <ScalarProperty Name="edate" ColumnName="edate" />
+                <ScalarProperty Name="endtime" ColumnName="endtime" />
+                <ScalarProperty Name="vkind" ColumnName="vkind" />
+                <ScalarProperty Name="hour" ColumnName="hour" />
+                <ScalarProperty Name="Ex" ColumnName="Ex" />
+                <ScalarProperty Name="checkname" ColumnName="checkname" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="agent" ColumnName="agent" />
+                <ScalarProperty Name="Motive" ColumnName="Motive" />
+                <ScalarProperty Name="account" ColumnName="account" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LeaveRequest_Role">
+            <EntityTypeMapping TypeName="SDPayModel.LeaveRequest_Role">
+              <MappingFragment StoreEntitySet="LeaveRequest_Role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Program" ColumnName="Program" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movie">
+            <EntityTypeMapping TypeName="SDPayModel.Movie">
+              <MappingFragment StoreEntitySet="Movie">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="moviename" ColumnName="moviename" />
+                <ScalarProperty Name="date" ColumnName="date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="report_clock">
+            <EntityTypeMapping TypeName="SDPayModel.report_clock">
+              <MappingFragment StoreEntitySet="report_clock">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="clock_id" ColumnName="clock_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="week" ColumnName="week" />
+                <ScalarProperty Name="rclock_in" ColumnName="rclock_in" />
+                <ScalarProperty Name="rclock_out" ColumnName="rclock_out" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="leave" ColumnName="leave" />
+                <ScalarProperty Name="account" ColumnName="account" />
+                <ScalarProperty Name="Ex" ColumnName="Ex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDhappytime">
+            <EntityTypeMapping TypeName="SDPayModel.SDhappytime">
+              <MappingFragment StoreEntitySet="SDhappytime">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DrinkName" ColumnName="DrinkName" />
+                <ScalarProperty Name="DrinkSweet" ColumnName="DrinkSweet" />
+                <ScalarProperty Name="DrinkIce" ColumnName="DrinkIce" />
+                <ScalarProperty Name="DrinkSize" ColumnName="DrinkSize" />
+                <ScalarProperty Name="DrinkAmount" ColumnName="DrinkAmount" />
+                <ScalarProperty Name="DrinkHowMatch" ColumnName="DrinkHowMatch" />
+                <ScalarProperty Name="Food01Name" ColumnName="Food01Name" />
+                <ScalarProperty Name="Food01Taste" ColumnName="Food01Taste" />
+                <ScalarProperty Name="Food01QA01" ColumnName="Food01QA01" />
+                <ScalarProperty Name="Food01Amount" ColumnName="Food01Amount" />
+                <ScalarProperty Name="Food01HM" ColumnName="Food01HM" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="pay" ColumnName="pay" />
+                <ScalarProperty Name="account" ColumnName="account" />
+                <ScalarProperty Name="paytype" ColumnName="paytype" />
+                <ScalarProperty Name="paymoney" ColumnName="paymoney" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDLeave_Year">
+            <EntityTypeMapping TypeName="SDPayModel.SDLeave_Year">
+              <MappingFragment StoreEntitySet="SDLeave_Year">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Leave_name" ColumnName="Leave_name" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="Ex" ColumnName="Ex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDMisPs">
+            <EntityTypeMapping TypeName="SDPayModel.SDMisPs">
+              <MappingFragment StoreEntitySet="SDMisPs">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="servername" ColumnName="servername" />
+                <ScalarProperty Name="account" ColumnName="account" />
+                <ScalarProperty Name="pwd" ColumnName="pwd" />
+                <ScalarProperty Name="Ex" ColumnName="Ex" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SDuser">
+            <EntityTypeMapping TypeName="SDPayModel.SDuser">
+              <MappingFragment StoreEntitySet="SDuser">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="clock_id" ColumnName="clock_id" />
+                <ScalarProperty Name="numberid" ColumnName="numberid" />
+                <ScalarProperty Name="startday" ColumnName="startday" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="department" ColumnName="department" />
+                <ScalarProperty Name="adaccount" ColumnName="adaccount" />
+                <ScalarProperty Name="LeaveAll" ColumnName="LeaveAll" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="RightIds" ColumnName="RightIds" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Leaveex" ColumnName="Leaveex" />
+                <ScalarProperty Name="lastday" ColumnName="lastday" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="agentA" ColumnName="agentA" />
+                <ScalarProperty Name="agentB" ColumnName="agentB" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="company" ColumnName="company" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="test">
+            <EntityTypeMapping TypeName="SDPayModel.test">
+              <MappingFragment StoreEntitySet="test">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="clock_in" ColumnName="clock_in" />
+                <ScalarProperty Name="clock_out" ColumnName="clock_out" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uploadinfo">
+            <EntityTypeMapping TypeName="SDPayModel.Uploadinfo">
+              <MappingFragment StoreEntitySet="Uploadinfo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="photoname" ColumnName="photoname" />
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="ex" ColumnName="ex" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="Mleft" ColumnName="Mleft" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wedding_Question">
+            <EntityTypeMapping TypeName="SDPayModel.Wedding_Question">
+              <MappingFragment StoreEntitySet="Wedding_Question">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="num" ColumnName="num" />
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="item" ColumnName="item" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="stop" ColumnName="stop" />
+                <ScalarProperty Name="ans" ColumnName="ans" />
+                <ScalarProperty Name="sumans" ColumnName="sumans" />
+                <ScalarProperty Name="state" ColumnName="state" />
+                <ScalarProperty Name="fraction" ColumnName="fraction" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wedding_UserAns">
+            <EntityTypeMapping TypeName="SDPayModel.Wedding_UserAns">
+              <MappingFragment StoreEntitySet="Wedding_UserAns">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="weddingname" ColumnName="weddingname" />
+                <ScalarProperty Name="uid" ColumnName="uid" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="ans" ColumnName="ans" />
+                <ScalarProperty Name="XorV" ColumnName="XorV" />
+                <ScalarProperty Name="fraction" ColumnName="fraction" />
+                <ScalarProperty Name="anstime" ColumnName="anstime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wedding_UserInfo">
+            <EntityTypeMapping TypeName="SDPayModel.Wedding_UserInfo">
+              <MappingFragment StoreEntitySet="Wedding_UserInfo">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="weddingname" ColumnName="weddingname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="workadd">
+            <EntityTypeMapping TypeName="SDPayModel.workadd">
+              <MappingFragment StoreEntitySet="workadd">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="starttime" ColumnName="starttime" />
+                <ScalarProperty Name="endtime" ColumnName="endtime" />
+                <ScalarProperty Name="wkind" ColumnName="wkind" />
+                <ScalarProperty Name="hour" ColumnName="hour" />
+                <ScalarProperty Name="Ex" ColumnName="Ex" />
+                <ScalarProperty Name="Orderid" ColumnName="Orderid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Permission">
+            <EntityTypeMapping TypeName="SDPayModel.Permission">
+              <MappingFragment StoreEntitySet="Permission">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PermissionItem" ColumnName="PermissionItem" />
+                <ScalarProperty Name="Controller" ColumnName="Controller" />
+                <ScalarProperty Name="Ex" ColumnName="Ex" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="無" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
