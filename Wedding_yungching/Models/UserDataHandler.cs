@@ -30,6 +30,26 @@ namespace Wedding_yungching.Models
             HttpContext.Current.Response.Cookies.Add(cookie);
         }
 
+        //Cookies for wedding
+        public static void LoginWeddingSaveToCookies(Wedding_UserInfo user)
+        {
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(
+                version: 1,
+                name: user.username,
+                issueDate: DateTime.Now,
+                expiration: DateTime.Now.AddHours(10),
+                isPersistent: false,
+                userData: user.weddingname,//UserData用來儲存使用者編號
+                cookiePath: FormsAuthentication.FormsCookiePath
+                );
+
+            string encryptTicket = FormsAuthentication.Encrypt(ticket);
+            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encryptTicket);
+            cookie.HttpOnly = true;
+            cookie.Expires = ticket.Expiration;
+            HttpContext.Current.Response.Cookies.Add(cookie);
+        }
+
         public static string Md5Hash(string password)
         {
             MD5CryptoServiceProvider md5Hasher = new MD5CryptoServiceProvider();

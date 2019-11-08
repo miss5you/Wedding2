@@ -268,6 +268,9 @@
     <Content Include="Views\Wedding\Login.cshtml" />
     <Content Include="Views\Wedding\NewPhotoUp.cshtml" />
     <Content Include="Views\Wedding\NewPhotoWall.cshtml" />
+    <Content Include="Views\Wedding\weddingphoto_show.cshtml" />
+    <Content Include="Views\Wedding\GameUserLoginView.cshtml" />
+    <Content Include="Views\Wedding\GameUserView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Wedding_yungching.Uploadinfo>
+@{
+    ViewBag.Title = "weddingphoto_show";
+    Layout = "~/Views/Shared/_0112WeddingLayout.cshtml";
+}
+
+
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+
+
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-6">
+                    <div class="card card-chart">
+                        <div class="card-header">
+                            <img src="..@item.photoname" style="width:100%;">
+                        </div>
+                        <div class="card-body" style="font-family:Microsoft JhengHei;">
+                            <h6 class="card-title"><b style="line-height:20px;">@item.size</b></h6>
+                            <font size="3">@item.ex</font>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="stats">
+                                @*<i class="fa fa-clock"><a>&nbsp;@item.date</a></i>*@
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+

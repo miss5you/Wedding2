@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "GameUserLoginView";
+    Layout = "~/Views/Shared/_0112WeddingLayout.cshtml";
+}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="#pablo">
+                            <img class="img" src="../assets_wedding/img/ethancheng/other/marc.jpg">
+                        </a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header card-header-primary">
+                            <h4 class="card-title">謝謝你,來參加我們的婚禮!!到了最好玩的遊戲時間,請填入你的名字、綽號,讓我們一起來猜猜猜吧!!</h4>
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                @Html.AntiForgeryToken()
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group bmd-form-group">
+                                            <label>輸入:名字、綽號(例:基隆集八點)</label>
+                                            <input type="text" class="form-control" name="LoginAccount" required>
+                                            <input name="numberid" hidden="" value="SD-TW00015" required>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary pull-right">送出</button>
+                                <label class="text-danger">@ViewBag.error</label>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

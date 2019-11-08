@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Wedding_yungching.Models;
 
 namespace Wedding_yungching.Controllers
@@ -89,7 +90,7 @@ namespace Wedding_yungching.Controllers
             //確認是否有登入
             if (User.Identity.Name.ToLower() == "ethancheng") ViewBag.del = "givedel";
 
-            return View();
+            return View(findphoto.OrderByDescending(r => r.date).ToList());
         }
 
         //接收留言
@@ -211,5 +212,152 @@ namespace Wedding_yungching.Controllers
 
             return image;
         }
+
+        //緍紗照分頁
+        public ActionResult weddingphoto_show()
+        {
+            List<Uploadinfo> findphoto = new List<Uploadinfo>();
+            //檔案路徑
+            string pathphoto = ConfigurationManager.AppSettings["WeddingPhoto"] + "photo/";
+            String[] FileCollection = Directory.GetFiles(Server.MapPath(pathphoto), "*.jpg");
+            if (FileCollection.LongCount() != 0)
+            {
+                foreach (var item in FileCollection)
+                {
+                    Uploadinfo path = new Uploadinfo()
+                    {
+                        photoname = pathphoto + Path.GetFileName(item),
+                    };
+                    findphoto.Add(path);
+                }
+
+            }
+            else//找尋temp資料夾並壓縮
+            {
+                string pathphoto2 = ConfigurationManager.AppSettings["WeddingPhoto"] + "temp/";
+                String[] FileCollection2 = Directory.GetFiles(Server.MapPath(pathphoto2), "*.*");
+
+                foreach (var item in FileCollection2)
+                {
+
+                    //檔名
+                    string filename = Path.GetFileName(item);
+                    //宣告圖片
+                    Image photo = Image.FromFile(item);
+                    //若size過大則先壓縮
+                    int Height = photo.Height;
+                    int Width = photo.Width;
+                    //如果大小不是預期的,重設大小並壓縮
+                    if (Height != 1500)
+                    {
+                        //調整size並壓縮
+                        int NewHeight = 1500;//固定高度
+                        float NewValue = (float)NewHeight / (float)Height;
+                        int NewWidth = (int)(Width * NewValue);
+
+                        Bitmap bmpThumb = new Bitmap(NewWidth, NewHeight);
+                        Graphics g = Graphics.FromImage(bmpThumb);
+                        g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                        //绘制图像
+                        g.DrawImage(photo, 0, 0, NewWidth, NewHeight);
+                        g.Dispose();
+                        //壓縮
+                        EncoderParameters myEncoderParameters = new EncoderParameters();
+                        long[] qy = new long[1];
+                        qy[0] = 80;//设置压缩的比例1-100  
+                        EncoderParameter myEncoderParameter = new EncoderParameter(Encoder.Quality, qy);
+                        myEncoderParameters.Param[0] = myEncoderParameter;
+                        ImageCodecInfo[] arrayICI = ImageCodecInfo.GetImageEncoders();
+                        ImageCodecInfo jpegICIinfo = null;
+                        for (int x = 0; x < arrayICI.Length; x++)
+                        {
+                            if (arrayICI[x].FormatDescription.Equals("JPEG"))
+                            {
+                                jpegICIinfo = arrayICI[x];
+                                break;
+                            }
+                        }
+
+                        if (jpegICIinfo != null)
+                        {
+                            filename = "New_" + filename;//檔名
+                            bmpThumb.Save(Server.MapPath(pathphoto + filename), jpegICIinfo, myEncoderParameters);
+
+                        }
+
+                        Uploadinfo path = new Uploadinfo()
+                        {
+                            photoname = pathphoto + filename,
+                        };
+                        findphoto.Add(path);
+                    }
+
+                }
+            }
+
+            return View();
+        }
+
+        //遊戲(User端)login
+        public ActionResult GameUserLoginView(string LoginAccount, string numberid)
+        {
+
+            SDuser user = userdb.SDuser.Where(x => x.numberid == numberid).FirstOrDefault();
+
+            if (user != null)
+            {
+                Wedding_UserInfo wedding_user = userdb.Wedding_UserInfo.Where(x => x.username == LoginAccount).FirstOrDefault();
+                if (wedding_user == null)
+                {
+                    //存入db
+                    Wedding_UserInfo userinfo = new Wedding_UserInfo()
+                    {
+                        username = LoginAccount,
+                        weddingname = user.adaccount,
+                    };
+                    userdb.Wedding_UserInfo.Add(userinfo);
+                    userdb.SaveChanges();
+
+                    //存入Cookies
+                    UserDataHandler.LoginWeddingSaveToCookies(userinfo);
+
+                    return RedirectToAction("GameUserView", "Wedding");
+                }
+                else
+                {
+                    ViewBag.error = "已經有人使用,請重新輸入!!";
+                }
+
+            }
+
+
+            return View();
+        }
+
+        //遊戲(User端)
+        [Authorize]
+        public ActionResult GameUserView()
+        {
+            ViewBag.name = User.Identity.Name;
+            return View();
+        }
+
+        //登入
+        public ActionResult Login()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("NewPhotoWall", "Wedding");
+            }
+            return View();
+        }
+
+        //登出
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("NewPhotoWall", "Wedding");
+        }
+
     }
 }

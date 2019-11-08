@@ -1,4 +1,4 @@
-﻿@model List<IEnumerable<Wedding_yungching.Uploadinfo>>
+﻿
 @{
     ViewBag.Title = "NewPhotoWall";
     Layout = "~/Views/Shared/_0112WeddingLayout.cshtml";
@@ -10,7 +10,7 @@
         <div class="row">
 
 
-            @foreach (var item in Model)
+            @foreach (var item in Model as List<Uploadinfo>)
             {
 
                 <div class="col-md-5">
