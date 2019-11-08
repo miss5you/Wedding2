@@ -1,0 +1,75 @@
+﻿@model List<IEnumerable<Wedding_yungching.Uploadinfo>>
+@{
+    ViewBag.Title = "NewPhotoWall";
+    Layout = "~/Views/Shared/_0112WeddingLayout.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="row">
+
+
+            @foreach (var item in Model)
+            {
+
+                <div class="col-md-5">
+                    <div class="card card-chart">
+                        <div class="card-header">
+                            <img src="..@item.photoname" style="width:100%;">
+                        </div>
+                        <div class="card-body" style="font-family:Microsoft JhengHei;">
+                            <h6 class="card-title"><b style="line-height:20px;">@item.size</b></h6>
+                            <font size="3">@item.ex</font>
+                        </div>
+
+                        <div class="card-footer">
+                            <div class="stats">
+                                <i class="fa fa-clock"><a>&nbsp;@item.date</a></i>
+
+                            </div>
+                        </div>
+                        @if (ViewBag.del == "givedel")
+                        {
+                            <button class="btn btn-round delphoto" style="font-size:17px;font-family:Microsoft JhengHei;background-color:crimson;" id="@item.id">刪除</button>
+                        }
+
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+           //重新註冊事件,刪除
+        $(document).on("click", '.delphoto', function () {
+           if (confirm('確定是否刪除?')) {
+                $.ajax({
+                    url: "@Url.Action("delphoto", "Wedding")",
+                    type: "POST",
+                    data: { "id": $(this).attr("id") },
+                    dataType: "text",
+                    success: function (data) {
+                        if (data == "完成") {
+                            alert("刪除完成");
+                            window.location = "/Wedding/NewPhotoWall";
+                        }
+                        else {
+                            alert("error");
+                        }
+                    },
+                })
+            }
+
+        });
+
+    </script>
+
+}

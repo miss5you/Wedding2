@@ -265,10 +265,12 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_0112WeddingLayout.cshtml" />
+    <Content Include="Views\Wedding\Login.cshtml" />
+    <Content Include="Views\Wedding\NewPhotoUp.cshtml" />
+    <Content Include="Views\Wedding\NewPhotoWall.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Wedding\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
