@@ -522,7 +522,7 @@ namespace Wedding_yungching.Controllers
                 {
                     for (int i = 1; i <= int.Parse(qtestuser); i++)
                     {
-                        string name = "樹林大雞哥A" + i;
+                        string name = "樹林基哥A" + i;
                         if (userinfo.Where(r => r.name == name && r.uid == item.uid).Count() == 0)//避免資料重覆
                         {
 
